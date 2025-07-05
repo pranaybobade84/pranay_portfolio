@@ -8,3 +8,4 @@ app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api/admin", userRouter);
+app.use("/api/user", userRouter);
