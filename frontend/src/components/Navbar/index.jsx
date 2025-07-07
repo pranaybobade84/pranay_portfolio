@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Code2, Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { pathname } = useLocation();
 
   const links = [
     { name: "Home", to: "/" },
@@ -16,37 +17,43 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-[#0f1117]/90 backdrop-blur-md shadow-md text-white">
+    <header className="fixed top-0 left-0 w-full z-50 bg-black text-white border-b border-neutral-800 shadow-sm font-poppins">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-        {/* Logo */}
-        <h1 className="text-2xl font-bold text-lime-400 hover:scale-105 transition duration-300">
-          Pranay.dev
-        </h1>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-6 text-sm font-medium">
+        {/* Logo */}
+   <Link
+  to="/"
+  className="flex items-center gap-2 text-2xl font-extrabold tracking-wider text-red-500 hover:text-white  transition duration-300 font-poppins"
+>
+  &lt;pranay.dev /&gt;
+</Link>  
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex gap-6 text-sm font-medium uppercase tracking-wide">
           {links.slice(0, 5).map((link) => (
             <Link
               key={link.name}
               to={link.to}
-              className="hover:text-lime-400 transition-colors duration-300"
+              className={`hover:text-red-500 transition duration-300 ${
+                pathname === link.to ? "text-red-500 font-bold" : "text-white"
+              }`}
             >
               {link.name}
             </Link>
           ))}
         </nav>
 
-        {/* CTA Button */}
+        {/* CTA */}
         <div className="hidden md:block">
           <Link
             to="/contact"
-            className="bg-lime-400 text-black px-4 py-2 rounded-md font-semibold hover:bg-lime-500 hover:scale-105 active:scale-95 transition-all duration-300"
+            className="px-4 py-2 rounded border border-white text-white hover:bg-red-500 hover:border-black hover:text-black transition-all duration-300 font-semibold text-sm uppercase"
           >
-            Contact Me
+            Contact
           </Link>
         </div>
 
-        {/* Mobile Hamburger Icon */}
+        {/* Hamburger Icon */}
         <button
           onClick={() => setMenuOpen(true)}
           className="block md:hidden text-white"
@@ -55,9 +62,9 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Full-Screen Mobile Menu */}
+      {/* Mobile Nav Overlay */}
       <div
-        className={`fixed inset-0 h-screen w-screen z-[999] bg-[#0f1117] transition-all duration-300 ease-in-out ${
+        className={`fixed inset-0 bg-black z-[999] flex flex-col justify-center items-center space-y-8 transition-all duration-300 ${
           menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >
@@ -68,18 +75,16 @@ const Navbar = () => {
           <X size={32} />
         </button>
 
-        <nav className="h-full flex flex-col justify-center items-center gap-6 text-2xl font-semibold text-center">
-          {links.map((link) => (
-            <Link
-              key={link.name}
-              to={link.to}
-              onClick={() => setMenuOpen(false)}
-              className="hover:text-lime-400 transition duration-300"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
+        {links.map((link) => (
+          <Link
+            key={link.name}
+            to={link.to}
+            onClick={() => setMenuOpen(false)}
+            className="text-2xl font-semibold hover:text-red-500 transition duration-300"
+          >
+            {link.name}
+          </Link>
+        ))}
       </div>
     </header>
   );
