@@ -7,14 +7,13 @@ import {
   Phone,
   MapPin,
   FileText,
+  GraduationCap,
 } from "lucide-react";
 
 const About = () => {
   const about = {
     name: "Pranay Bobade",
     title: "MERN Stack Developer & UI/UX Enthusiast",
-    bio: "I build full-stack web apps that are fast, responsive, and intuitive. With a strong foundation in JavaScript and a passion for clean interfaces, I create solutions that not only work — they impress.",
-    profileImage: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
     location: "Nagpur, India",
     email: "pranay.dev@example.com",
     phone: "+91 9876543210",
@@ -25,118 +24,187 @@ const About = () => {
       twitter: "https://twitter.com/pranaybobade",
       portfolio: "https://pranay.dev",
     },
-    isVisible: true,
+    education: [
+      {
+        degree: "BCA - Bachelor of Computer Applications",
+        year: "2022",
+        institute: "XYZ University, Nagpur",
+      },
+    ],
   };
 
-  const fallbackImage =
-    "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-
-  if (!about?.isVisible) return null;
-
   return (
-    <section className="bg-[#0f1117] text-white px-6 py-20 min-h-screen">
-      {/* Section Heading */}
-      <div className="text-center mb-16">
-        <h2 className="text-6xl sm:text-7xl font-extrabold text-gray-800 opacity-10 tracking-widest uppercase">
-          About Me
-        </h2>
-        <p className="mt-2 text-3xl sm:text-4xl font-bold text-lime-400 z-10 relative">
-          Who am I?
+    <section className="bg-black text-white min-h-screen px-6 py-20 font-mono relative overflow-hidden">
+      <div className="text-center z-10 relative mb-20">
+        <p className="mt-4 text-xl md:text-2xl text-gray-400 tracking-widest uppercase">
+          Building Experiences With JavaScript Power
         </p>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* Profile Image */}
-        {about.profileImage && (
-          <img
-            src={about.profileImage || fallbackImage}
-            alt={about.name}
-            className="rounded-xl shadow-lg w-56 h-56 object-cover mx-auto md:mx-0"
-          />
-        )}
-
-        {/* Info Section */}
-        <div>
-          <h2 className="text-4xl font-bold text-lime-400 mb-2">{about.name}</h2>
-          <p className="text-xl text-gray-300 font-semibold mb-4">
-            {about.title}
+      <div className="max-w-5xl mx-auto flex flex-col gap-12 z-10 text-lg md:text-xl text-gray-300">
+        <div className="space-y-6 leading-relaxed">
+          <h2 className="text-3xl font-bold text-white relative inline-block">
+            <span>My Story</span>
+            <svg
+              className="absolute -bottom-2 left-0 w-full h-4"
+              viewBox="0 0 100 10"
+              preserveAspectRatio="none"
+              fill="none"
+            >
+              <path
+                d="M0 5 C20 10, 80 0, 100 5"
+                stroke="red"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </h2>
+          <p>
+            Hello! I’m Pranay, a{" "}
+            <span className="text-white font-semibold">
+              MERN Stack Developer
+            </span>{" "}
+            from Nagpur. I specialize in building high-performance full-stack
+            applications that are functional, scalable, and visually compelling.
           </p>
-          <p className="text-gray-400 leading-relaxed mb-6">{about.bio}</p>
+          <p>
+            I started this journey with a deep curiosity about how things work
+            on the internet — and over time, I turned that curiosity into a
+            mission to build clean, modern apps that feel as good as they work.
+          </p>
+          <p>
+            My tools of trade?{" "}
+            <span className="text-white font-semibold">
+              MongoDB, Express, React, Node
+            </span>{" "}
+            — the full MERN suite. I’m also passionate about UI/UX and
+            continuously strive to enhance user interactions.
+          </p>
+        </div>
 
-          <div className="space-y-2 text-sm sm:text-base text-gray-400">
-            {about.location && (
-              <p className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-lime-400" /> {about.location}
-              </p>
-            )}
-            {about.email && (
-              <p className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-lime-400" /> {about.email}
-              </p>
-            )}
-            {about.phone && (
-              <p className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-lime-400" /> {about.phone}
-              </p>
-            )}
-            {about.resumeLink && (
-              <a
-                href={about.resumeLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-lime-400 font-medium hover:underline"
-              >
-                <FileText className="w-4 h-4" /> View Resume
-              </a>
-            )}
+        <div className="space-y-6">
+          <h2 className="text-3xl font-bold text-white relative inline-block">
+            <span>Milestones</span>
+            <svg
+              className="absolute -bottom-2 left-0 w-full h-4"
+              viewBox="0 0 100 10"
+              preserveAspectRatio="none"
+              fill="none"
+            >
+              <path
+                d="M0 5 C30 0, 70 10, 100 5"
+                stroke="lime"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </h2>
+          <ul className="border-l-2 border-lime-400 pl-6 space-y-4">
+            <li>
+              <span className="text-lime-400 font-semibold">2019</span> — Began
+              exploring HTML & CSS.
+            </li>
+            <li>
+              <span className="text-lime-400 font-semibold">2020</span> —
+              Learned JavaScript & built small apps.
+            </li>
+            <li>
+              <span className="text-lime-400 font-semibold">2023</span> —
+              Interned as a MERN Stack Dev on medical systems.
+            </li>
+            <li>
+              <span className="text-lime-400 font-semibold">2025</span> —
+              Focused on mastering full-stack and DSA daily.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold text-white flex items-center gap-2 mb-6">
+            <GraduationCap className="text-lime-400" /> Education
+          </h2>
+          <ul className="space-y-3">
+            {about.education.map((edu, idx) => (
+              <li key={idx}>
+                <span className="font-semibold text-white">{edu.degree}</span> —{" "}
+                {edu.institute} ({edu.year})
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <p className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-red-500" /> {about.location}
+            </p>
+            <p className="flex items-center gap-2">
+              <Mail className="w-4 h-4 text-red-500" /> {about.email}
+            </p>
+            <p className="flex items-center gap-2">
+              <Phone className="w-4 h-4 text-red-500" /> {about.phone}
+            </p>
+            <a
+              href={about.resumeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-red-400 hover:underline"
+            >
+              <FileText className="w-4 h-4" /> View Resume
+            </a>
           </div>
 
-          {/* Social Icons */}
-          <div className="flex gap-5 mt-6 text-lime-400 text-xl">
-            {about.socialLinks.github && (
-              <a
-                href={about.socialLinks.github}
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-white transition"
-              >
-                <Github />
-              </a>
-            )}
-            {about.socialLinks.linkedin && (
-              <a
-                href={about.socialLinks.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-white transition"
-              >
-                <Linkedin />
-              </a>
-            )}
-            {about.socialLinks.twitter && (
-              <a
-                href={about.socialLinks.twitter}
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-white transition"
-              >
-                <Twitter />
-              </a>
-            )}
-            {about.socialLinks.portfolio && (
-              <a
-                href={about.socialLinks.portfolio}
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-white transition"
-              >
-                <Globe />
-              </a>
-            )}
+          <div className="flex gap-5 text-xl">
+            <a
+              href={about.socialLinks.github}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white transition text-red-400"
+            >
+              <Github />
+            </a>
+            <a
+              href={about.socialLinks.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white transition text-red-400"
+            >
+              <Linkedin />
+            </a>
+            <a
+              href={about.socialLinks.twitter}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white transition text-red-400"
+            >
+              <Twitter />
+            </a>
+            <a
+              href={about.socialLinks.portfolio}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white transition text-red-400"
+            >
+              <Globe />
+            </a>
           </div>
         </div>
       </div>
+
+      <svg
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[250px] h-6 opacity-30"
+        viewBox="0 0 100 10"
+        fill="none"
+      >
+        <path
+          d="M0 5 C30 0, 70 10, 100 5"
+          stroke="red"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
     </section>
   );
 };

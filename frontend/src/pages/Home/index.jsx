@@ -52,28 +52,28 @@ const Home = () => {
       </div>
 
       {/* Location */}
-<div className="text-right mt-10 text-xs md:text-sm uppercase tracking-widest text-gray-600 z-10 relative pr-1">
-  <div className="flex justify-end items-center gap-2">
-    <MapPin className="w-4 h-4 md:w-5 md:h-5 text-red-500" />
-    <p>Based in Nagpur, India</p>
-  </div>
+      <div className="text-right mt-10 text-xs md:text-sm uppercase tracking-widest text-gray-600 z-10 relative pr-1">
+        <div className="flex justify-end items-center gap-2">
+          <MapPin className="w-4 h-4 md:w-5 md:h-5 text-red-500" />
+          <p>Based in Nagpur, India</p>
+        </div>
 
-  {/* Curvy decorative line */}
-  <svg
-    className="absolute -bottom-3 right-0 w-32 h-4 md:h-5"
-    viewBox="0 0 100 10"
-    preserveAspectRatio="none"
-    fill="none"
-  >
-    <path
-      d="M0 5 C30 10, 70 0, 100 5"
-      stroke="red"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-</div>
+        {/* Curvy decorative line */}
+        <svg
+          className="absolute -bottom-3 right-0 w-32 h-4 md:h-5"
+          viewBox="0 0 100 10"
+          preserveAspectRatio="none"
+          fill="none"
+        >
+          <path
+            d="M0 5 C30 10, 70 0, 100 5"
+            stroke="red"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
 
       {/* Right-side Circle Visual */}
       <div className="absolute top-60 right-40 hidden lg:block">
@@ -95,9 +95,9 @@ const Home = () => {
               <path
                 id="techCircle"
                 d="M 50, 50
-             m -40, 0
-             a 40,40 0 1,1 80,0
-             a 40,40 0 1,1 -80,0"
+              m -40, 0
+              a 40,40 0 1,1 80,0
+              a 40,40 0 1,1 -80,0"
               />
             </defs>
             <text fill="white" fontSize="10" fontWeight="900" letterSpacing="2">
@@ -107,6 +107,9 @@ const Home = () => {
             </text>
           </svg>
         </div>
+      </div>
+      <div className="absolute bottom-3 right-6 text-xs md:text-sm italic text-gray-500 tracking-wide max-w-xs text-right z-10 ">
+        "Building today, better than yesterday — one line at a time."
       </div>
     </section>
   );
