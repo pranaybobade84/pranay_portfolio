@@ -9,6 +9,9 @@ import {
   FileText,
   GraduationCap,
 } from "lucide-react";
+import EducationImg from "../../assets/education.avif";
+import MilestoneImg from "../../assets/milestone.avif";
+import StoryImg from "../../assets/story.avif";
 
 const About = () => {
   const about = {
@@ -36,14 +39,22 @@ const About = () => {
   return (
     <section className="bg-black text-white min-h-screen px-6 py-20 font-mono relative overflow-hidden">
       <div className="text-center z-10 relative mb-20">
-        <p className="mt-4 text-xl md:text-2xl text-gray-400 tracking-widest uppercase">
-          Building Experiences With JavaScript Power
+        <p className="mt-4 text-xl md:text-2xl text-gray-400 tracking-widest uppercase italic font-poppins">
+          {` < Building Experiences With JavaScript Power />`}
         </p>
       </div>
 
-      <div className="max-w-5xl mx-auto flex flex-col gap-12 z-10 text-lg md:text-xl text-gray-300">
+      <div className="max-w-5xl mx-auto flex flex-col gap-12 z-10 text-lg md:text-3xl text-gray-300 ">
+        <div className="w-full h-[60vh] overflow-hidden relative group">
+          <img
+            src={StoryImg}
+            alt="Story Visual"
+            className="w-full h-full object-cover transform transition-transform duration-[3000ms] ease-in-out group-hover:scale-110"
+          />
+        </div>
+
         <div className="space-y-6 leading-relaxed">
-          <h2 className="text-3xl font-bold text-white relative inline-block">
+          <h2 className="text-[36px] sm:text-[56px] md:text-[72px] lg:text-[88px] font-extrabold uppercase leading-none tracking-tight font-poppins relative  inline-block">
             <span>My Story</span>
             <svg
               className="absolute -bottom-2 left-0 w-full h-4"
@@ -61,30 +72,57 @@ const About = () => {
             </svg>
           </h2>
           <p>
-            Hello! I’m Pranay, a{" "}
-            <span className="text-white font-semibold">
-              MERN Stack Developer
-            </span>{" "}
-            from Nagpur. I specialize in building high-performance full-stack
-            applications that are functional, scalable, and visually compelling.
+            My name is <span className="text-white font-semibold">Pranay</span>,
+            and I live in{" "}
+            <span className="text-white font-semibold">Nagpur, India</span>.
+            Most days, you’ll find me learning, building, and trying to grow —
+            both as a developer and as a person.
           </p>
           <p>
-            I started this journey with a deep curiosity about how things work
-            on the internet — and over time, I turned that curiosity into a
-            mission to build clean, modern apps that feel as good as they work.
+            I come from a humble background. My{" "}
+            <span className="text-white font-semibold">
+              father was a farmer
+            </span>{" "}
+            who worked hard to give us everything he could before he passed
+            away. My{" "}
+            <span className="text-white font-semibold">
+              mother is a housewife
+            </span>
+            , and her strength and love have shaped who I am today.
           </p>
           <p>
-            My tools of trade?{" "}
+            I don’t have any medical conditions. I'm healthy, grateful, and
+            fully present in the life I’m working to build.
+          </p>
+          <p>
+            I love creating things — especially with{" "}
             <span className="text-white font-semibold">
-              MongoDB, Express, React, Node
-            </span>{" "}
-            — the full MERN suite. I’m also passionate about UI/UX and
-            continuously strive to enhance user interactions.
+              JavaScript and the MERN stack
+            </span>
+            . Clean code, good design, and meaningful impact motivate me more
+            than titles or buzzwords. I'm passionate about solving problems and
+            bringing ideas to life with technology.
+          </p>
+          <p>
+            I believe in staying consistent, learning every day, and building a
+            future that reflects both skill and character. This isn’t just a
+            career path for me — it’s a journey of growth, purpose, and
+            persistence.
           </p>
         </div>
 
+        <hr className="border-t border-gray-600 my-10" />
+        <div className="w-full h-[60vh] overflow-hidden relative group">
+          <img
+            src={MilestoneImg}
+            alt="Milestone Journey"
+            className="w-full h-full object-cover transition-transform duration-1000 ease-in-out group-hover:scale-105"
+          />
+        </div>
+
+        {/* Milestones */}
         <div className="space-y-6">
-          <h2 className="text-3xl font-bold text-white relative inline-block">
+          <h2 className="text-[36px] sm:text-[56px] md:text-[72px] lg:text-[88px] font-extrabold uppercase leading-none tracking-tight font-poppins relative  inline-block">
             <span>Milestones</span>
             <svg
               className="absolute -bottom-2 left-0 w-full h-4"
@@ -120,8 +158,18 @@ const About = () => {
             </li>
           </ul>
         </div>
+
+        <hr className="border-t border-gray-600 my-10" />
+        <div className="w-full h-[60vh] overflow-hidden relative group">
+          <img
+            src={EducationImg}
+            alt="Graduation"
+            className="w-full h-full object-cover transition-transform duration-1000 ease-in-out group-hover:scale-105"
+          />
+        </div>
+        {/* Education */}
         <div>
-          <h2 className="text-2xl font-bold text-white flex items-center gap-2 mb-6">
+          <h2 className="text-[36px] sm:text-[56px] md:text-[72px] lg:text-[88px] font-extrabold uppercase leading-none tracking-tight font-poppins relative  inline-block">
             <GraduationCap className="text-lime-400" /> Education
           </h2>
           <ul className="space-y-3">
@@ -133,7 +181,9 @@ const About = () => {
             ))}
           </ul>
         </div>
+        <hr className="border-t border-gray-600 mt-10 mb-5" />
 
+        {/* Contact */}
         <div className="space-y-6">
           <div className="space-y-2">
             <p className="flex items-center gap-2">
@@ -155,6 +205,7 @@ const About = () => {
             </a>
           </div>
 
+          {/* Social Links */}
           <div className="flex gap-5 text-xl">
             <a
               href={about.socialLinks.github}

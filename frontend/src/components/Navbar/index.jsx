@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Code2, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,45 +21,49 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
 
         {/* Logo */}
-   <Link
-  to="/"
-  className="flex items-center gap-2 text-2xl font-extrabold tracking-wider text-red-500 hover:text-white  transition duration-300 font-poppins"
->
-  &lt;pranay.dev /&gt;
-</Link>  
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-6 text-sm font-medium uppercase tracking-wide">
-          {links.slice(0, 5).map((link) => (
-            <Link
-              key={link.name}
-              to={link.to}
-              className={`hover:text-red-500 transition duration-300 ${
-                pathname === link.to ? "text-red-500 font-bold" : "text-white"
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-
-        {/* CTA */}
-        <div className="hidden md:block">
-          <Link
-            to="/contact"
-            className="px-4 py-2 rounded border border-white text-white hover:bg-red-500 hover:border-black hover:text-black transition-all duration-300 font-semibold text-sm uppercase"
-          >
-            Contact
-          </Link>
-        </div>
-
-        {/* Hamburger Icon */}
-        <button
-          onClick={() => setMenuOpen(true)}
-          className="block md:hidden text-white"
+        <Link
+          to="/"
+          className="flex items-center gap-2 text-2xl font-extrabold tracking-wider text-white hover:text-red-500 transition duration-300 font-poppins"
         >
-          <Menu size={28} />
-        </button>
+          &lt;pranay.dev /&gt;
+        </Link>
+
+        {/* Right Section: Nav + CTA + Hamburger */}
+        <div className="flex items-center gap-6">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex gap-6 text-sm font-medium uppercase tracking-wide">
+            {links.slice(0, 5).map((link) => (
+              <Link
+                key={link.name}
+                to={link.to}
+                className={`hover:text-red-500 transition duration-300 ${
+                  pathname === link.to ? "text-red-500 font-bold" : "text-white"
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTA */}
+          <div className="hidden md:block">
+           <Link
+  to="/contact"
+  className="px-4 py-2 rounded border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 font-semibold text-sm uppercase"
+>
+  Contact
+</Link>
+
+          </div>
+
+          {/* Hamburger Icon */}
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="block md:hidden text-white"
+          >
+            <Menu size={28} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile Nav Overlay */}
