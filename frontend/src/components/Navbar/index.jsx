@@ -11,7 +11,6 @@ const Navbar = () => {
     { name: "About", to: "/about" },
     { name: "Experience", to: "/experience" },
     { name: "Skills", to: "/skills" },
-    { name: "Services", to: "/services" },
     { name: "Blog", to: "/blog" },
     { name: "Contact", to: "/contact" },
   ];
@@ -19,8 +18,6 @@ const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-black text-white border-b border-neutral-800 shadow-sm font-poppins">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-
-        {/* Logo */}
         <Link
           to="/"
           className="flex items-center gap-2 text-2xl font-extrabold tracking-wider text-white hover:text-red-500 transition duration-300 font-poppins"
@@ -28,9 +25,7 @@ const Navbar = () => {
           &lt;pranay.dev /&gt;
         </Link>
 
-        {/* Right Section: Nav + CTA + Hamburger */}
         <div className="flex items-center gap-6">
-          {/* Desktop Nav */}
           <nav className="hidden md:flex gap-6 text-sm font-medium uppercase tracking-wide">
             {links.slice(0, 5).map((link) => (
               <Link
@@ -45,18 +40,15 @@ const Navbar = () => {
             ))}
           </nav>
 
-          {/* CTA */}
           <div className="hidden md:block">
-           <Link
-  to="/contact"
-  className="px-4 py-2 rounded border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 font-semibold text-sm uppercase"
->
-  Contact
-</Link>
-
+            <Link
+              to="/contact"
+              className="px-4 py-2 rounded border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 font-semibold text-sm uppercase"
+            >
+              Contact
+            </Link>
           </div>
 
-          {/* Hamburger Icon */}
           <button
             onClick={() => setMenuOpen(true)}
             className="block md:hidden text-white"
@@ -66,7 +58,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Nav Overlay */}
       <div
         className={`fixed inset-0 bg-black z-[999] flex flex-col justify-center items-center space-y-8 transition-all duration-300 ${
           menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
