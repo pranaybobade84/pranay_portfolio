@@ -11,6 +11,8 @@ import AdminLayout from "../layout/AdminLayOut";
 import ProtectedRoute from "../pages/ProtectedRoute";
 import AdminDashboard from "../Admin/AdminDashboard";
 import ManageBlogs from "../Admin/ManageBlogs";
+import Login from "../pages/auth/Login";
+import RegisterPage from "../pages/auth/Register";
 
 const router = createBrowserRouter([
   {
@@ -46,22 +48,30 @@ const router = createBrowserRouter([
         element: <BlogDetailPage />,
       },
       {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
+      },
+      {
         path: "admin",
         element: <ProtectedRoute />,
         children: [
           {
             path: "",
             element: <AdminLayout />,
-            children:[
+            children: [
               {
-                index:true,
-                element:<AdminDashboard/>
+                index: true,
+                element: <AdminDashboard />,
               },
               {
-                path:'blogs',
-                element:<ManageBlogs/>
-              }
-            ]
+                path: "blogs",
+                element: <ManageBlogs />,
+              },
+            ],
           },
         ],
       },

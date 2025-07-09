@@ -6,6 +6,9 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
+  const isAuthenticated = true
+  const isAdmin = true;
+
   const links = [
     { name: "Home", to: "/" },
     { name: "About", to: "/about" },
@@ -20,14 +23,15 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
         <Link
           to="/"
-          className="flex items-center gap-2 text-2xl font-extrabold tracking-wider text-white hover:text-red-500 transition duration-300 font-poppins"
+          className="flex items-center gap-2 text-2xl font-extrabold tracking-wider text-white hover:text-red-500 transition duration-300"
         >
           &lt;pranay.dev /&gt;
         </Link>
 
         <div className="flex items-center gap-6">
+          {/* Desktop Links */}
           <nav className="hidden md:flex gap-6 text-sm font-medium uppercase tracking-wide">
-            {links.slice(0, 5).map((link) => (
+            {links.map((link) => (
               <Link
                 key={link.name}
                 to={link.to}
@@ -38,8 +42,26 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+
+            {/* Conditional Auth Button */}
+            {!isAuthenticated ? (
+              <Link
+                to="/login"
+                className="hover:text-red-500 transition duration-300"
+              >
+                Login
+              </Link>
+            ) : (
+              <Link
+                to={isAdmin ? "/admin" : "/dashboard"}
+                className="hover:text-yellow-400 text-yellow-500 transition duration-300"
+              >
+                {isAdmin ? "Admin" : "Dashboard"}
+              </Link>
+            )}
           </nav>
 
+          {/* Contact Button */}
           <div className="hidden md:block">
             <Link
               to="/contact"
@@ -49,6 +71,7 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setMenuOpen(true)}
             className="block md:hidden text-white"
@@ -58,6 +81,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Nav */}
       <div
         className={`fixed inset-0 bg-black z-[999] flex flex-col justify-center items-center space-y-8 transition-all duration-300 ${
           menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
@@ -80,6 +104,24 @@ const Navbar = () => {
             {link.name}
           </Link>
         ))}
+
+        {!isAuthenticated ? (
+          <Link
+            to="/login"
+            onClick={() => setMenuOpen(false)}
+            className="text-2xl font-semibold hover:text-red-500"
+          >
+            Login
+          </Link>
+        ) : (
+          <Link
+            to={isAdmin ? "/admin" : "/dashboard"}
+            onClick={() => setMenuOpen(false)}
+            className="text-2xl font-semibold hover:text-yellow-400"
+          >
+            {isAdmin ? "Admin" : "Dashboard"}
+          </Link>
+        )}
       </div>
     </header>
   );
