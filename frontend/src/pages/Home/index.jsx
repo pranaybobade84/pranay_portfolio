@@ -2,18 +2,18 @@ import { MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 const Home = () => {
   return (
-    <section className="bg-black text-white min-h-screen flex flex-col justify-between px-6 py-16 font-mono relative overflow-hidden ">
+    <section className="bg-black text-white min-h-screen flex flex-col justify-between px-6 py-14 font-mono relative overflow-hidden ">
       <div className="z-10 relative w-full space-y-6 px-4 md:px-10">
         <div className="w-full">
-          <h1 className="text-[48px] sm:text-[72px] md:text-[100px] lg:text-[120px] font-extrabold uppercase leading-none tracking-tight font-poppins text-left">
+          <h1 className="text-[48px] sm:text-[72px] md:text-[100px] lg:text-[120px] font-extrabold uppercase leading-none tracking-tight font-poppins text-left mt-3">
             I AM PRANAY
           </h1>
         </div>
 
         <div className="w-full text-right relative">
           <div className="inline-block relative">
-            <h2 className="text-[36px] sm:text-[56px] md:text-[72px] lg:text-[88px] font-extrabold uppercase leading-none tracking-tight font-poppins text-right">
-              MERN Stack Developer
+            <h2 className="text-[36px] sm:text-[56px] md:text-[72px] lg:text-[88px] font-extrabold uppercase leading-none tracking-tighter font-poppins text-right">
+              <span  className="text-red-500">MERN</span> Stack Developer
             </h2>
           </div>
         </div>

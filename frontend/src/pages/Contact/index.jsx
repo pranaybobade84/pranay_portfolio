@@ -5,7 +5,7 @@ const Contact = () => {
   const [showForm, setShowForm] = useState(false);
   return (
     <section className="min-h-screen bg-black text-white font-poppins flex flex-col  items-center px-4 sm:px-6 justify-center text-center">
-      <span className="flex">
+      <span className="flex ">
         {" Contact.".split("").map((ch, i) => (
           <h2
             key={i}
