@@ -1,12 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
 
 @import "tailwindcss";
 
 @theme {
   --font-poppins: "Poppins", sans-serif;
   --font-inter: "Inter", sans-serif;
-  --font-playfair: "Playfair Display", 'serif';
+  --font-playfair: "Playfair Display", "serif";
+  --animate-marquee: marquee;
+  @keyframes marquee {
+    "0%": {
+      transform: "translateX(100%)";
+    }
+    ,
+          "100%": {
+      transform: "translateX(-100%)";
+    }
+  }
 }
-

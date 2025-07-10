@@ -13,6 +13,7 @@ import AdminDashboard from "../Admin/AdminDashboard";
 import ManageBlogs from "../Admin/ManageBlogs";
 import Login from "../pages/auth/Login";
 import RegisterPage from "../pages/auth/Register";
+import ProjectSection from "../pages/Projects";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "skills",
         element: <SkillsSection />,
+      },
+      {
+        path: "projects",
+        element: <ProjectSection />,
       },
       {
         path: "blog",
