@@ -8,14 +8,5 @@
   --font-poppins: "Poppins", sans-serif;
   --font-inter: "Inter", sans-serif;
   --font-playfair: "Playfair Display", "serif";
-  --animate-marquee: marquee;
-  @keyframes marquee {
-    "0%": {
-      transform: "translateX(100%)";
-    }
-    ,
-          "100%": {
-      transform: "translateX(-100%)";
-    }
-  }
+  
 }
