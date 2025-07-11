@@ -24,7 +24,7 @@ const navItems = [
 const AdminLayout = () => {
   return (
     <div className="bg-black text-white font-poppins flex">
-      <aside className="fixed top-16 left-0 h-full w-16 md:w-64 bg-[#111] border-r border-red-600/20 p-4 z-50 transition-all duration-300 flex flex-col items-center md:items-start pt-6">
+      <aside className="fixed top-16 left-0 h-full w-16 md:w-64 bg-black    border-r border-red-600/20 p-4 z-50 transition-all duration-300 flex flex-col items-center md:items-start pt-6">
         <nav className="space-y-4 w-full">
           {navItems.map(({ name, path, icon: Icon }, index) => (
             <NavLink
@@ -48,7 +48,7 @@ const AdminLayout = () => {
 
         <button
           title="Logout"
-          className="mt-auto flex items-center md:justify-start justify-center gap-2 text-red-500 text-sm hover:text-yellow-400 w-full px-0 md:px-4 py-2"
+          className="mt-5 flex items-center md:justify-start justify-center gap-2 text-red-500 text-sm hover:text-yellow-400 w-full px-0 md:px-4 py-2 cursor-pointer"
         >
           <LogOut size={16} />
           <span className="hidden md:inline">Logout</span>

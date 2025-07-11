@@ -6,8 +6,8 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
-  const isAuthenticated = true
-  const isAdmin = true;
+  const isAuthenticated = false
+  const isAdmin = false;
 
   const links = [
     { name: "Home", to: "/" },
@@ -31,7 +31,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-6">
           {/* Desktop Links */}
-          <nav className="hidden md:flex gap-6 text-sm font-medium uppercase tracking-wide">
+          <nav className="hidden lg:flex gap-6 text-sm font-medium uppercase tracking-wide">
             {links.map((link) => (
               <Link
                 key={link.name}
@@ -62,20 +62,12 @@ const Navbar = () => {
             )}
           </nav>
 
-          {/* Contact Button */}
-          <div className="hidden md:block">
-            <Link
-              to="/contact"
-              className="px-4 py-2 rounded border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 font-semibold text-sm uppercase"
-            >
-              Contact
-            </Link>
-          </div>
+         
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMenuOpen(true)}
-            className="block md:hidden text-white"
+            className="block lg:hidden text-white"
           >
             <Menu size={28} />
           </button>
