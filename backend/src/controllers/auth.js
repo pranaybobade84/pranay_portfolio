@@ -41,16 +41,18 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "User already exists" });
   }
 
-  const avatarPath = req.file.path;
-
-  const avatar = await uploadOnCloudinary(avatarPath);
+  let avatarUrl = "";
+  if (req.file && req.file.path) {
+    const cloudinaryResponse = await uploadOnCloudinary(req.file.path);
+    avatarUrl = cloudinaryResponse?.secure_url || "";
+  }
 
   const newUser = new User({
     userName,
     email,
     password,
     role,
-    avatar: avatar.secure_url || "",
+    avatar: avatarUrl,
   });
 
   await newUser.save();
@@ -75,7 +77,9 @@ const login = asyncHandler(async (req, res) => {
   const user = await User.findOne({
     $or: [{ userName: userNameOrEmail }, { email: userNameOrEmail }],
   });
-
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
   const isUserValid = await user.comparePassword(password);
   if (!isUserValid) {
     return res.status(400).json({ message: "Invalid credentials" });

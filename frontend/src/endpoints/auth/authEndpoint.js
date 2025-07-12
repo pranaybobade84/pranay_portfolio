@@ -4,19 +4,28 @@ export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (data) => ({
-        url: "/auth/register",
+        url: "/user/register",
         method: "POST",
         body: data,
       }),
     }),
     login: builder.mutation({
       query: (data) => ({
-        url: "/auth/login",
+        url: "/user/login",
         method: "POST",
         body: data,
+      }),
+    }),
+    verifyToken: builder.query({
+      query: () => ({
+        url: "/user/verify-token",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       }),
     }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation,useVerifyTokenQuery } = authApi;

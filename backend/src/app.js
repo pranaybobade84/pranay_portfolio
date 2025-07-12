@@ -7,10 +7,17 @@ import skillsRouter from "./routes/skillls.js";
 import projectRouter from "./routes/projects.js";
 import aboutRouter from "./routes/about.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
-
+import cors from "cors";
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+  cors({
+    credentials: true,
+    methods: ["GET", "PUT", "POST", "DELETE", "PATCH"],
+    origin: "http://localhost:5173",
+  })
+);
 
 // Authentications
 app.use("/api/admin", userRouter);
