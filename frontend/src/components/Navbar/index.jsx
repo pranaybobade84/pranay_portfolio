@@ -6,8 +6,8 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
-  const isAuthenticated = false
-  const isAdmin = false;
+  const isAuthenticated = true
+  const isAdmin = true;
 
   const links = [
     { name: "Home", to: "/" },
