@@ -14,6 +14,7 @@ import ManageBlogs from "../Admin/ManageBlogs";
 import Login from "../pages/auth/Login";
 import RegisterPage from "../pages/auth/Register";
 import ProjectSection from "../pages/Projects";
+import Unauthorized from "../pages/UnAuthorized";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <RegisterPage />,
+      },
+      {
+        path: "unauthorized",
+        element: <Unauthorized />,
       },
       {
         path: "admin",

@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { useLoginMutation } from "../../../endpoints/auth/authEndpoint";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setCredientials } from "../../../features/auth/authSlice";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +14,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
 
   const handleChange = (e) => {
@@ -37,7 +39,11 @@ const Login = () => {
       const res = await login(formData).unwrap();
       toast.success("🎉 Login successful");
       localStorage.setItem("accessToken", res.accessToken);
-
+      dispatch(
+        setCredientials({
+          user: res?.user,
+        })
+      );
       if (res?.user?.role === "admin") {
         navigate("/admin");
       } else {
