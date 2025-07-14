@@ -56,7 +56,7 @@ const AdminLayout = () => {
       </aside>
 
       <div className="flex-1 h-full ml-16 md:ml-64 transition-all">
-        <main className="px-4 md:px-10 py-6 mt-10">
+        <main className="px-4 md:px-10 py-6">
           <Outlet />
         </main>
       </div>

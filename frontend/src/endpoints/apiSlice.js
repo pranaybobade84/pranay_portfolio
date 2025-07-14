@@ -4,6 +4,6 @@ import { BASE_API } from "../utils/constants";
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_API }),
-  endpoints:()=> ({}),
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_API, credentials: "include" }),
+  endpoints: () => ({}),
 });

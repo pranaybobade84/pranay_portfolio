@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { Heart, MessageSquare } from "lucide-react";
 
@@ -7,6 +6,7 @@ const dummyBlog = {
   title: "Mastering the MERN Stack in 2025",
   author: "Pranay",
   date: "2025-07-08",
+  image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJsb2d8ZW58MHx8MHx8fDA%3D",
   content: `## Why MERN?\nMERN is powerful because:\n\n- Full JavaScript stack\n- Scalable architecture\n- Huge community support\n\n**Code Sample:**\n\`\`\`js\nconst express = require('express');\nconst app = express();\napp.listen(3000);\n\`\`\`\n\n> The stack that made backend feel like frontend.`,
   likes: 12,
   comments: [
@@ -29,15 +29,27 @@ const BlogDetailPage = () => {
 
   return (
     <section className="min-h-screen bg-black text-white py-20 px-6 font-poppins relative overflow-hidden">
+      {/* Ambient Blurs */}
       <div className="absolute w-[300px] h-[300px] bg-red-500 blur-[120px] opacity-30 rounded-full top-10 left-10" />
       <div className="absolute w-[200px] h-[200px] bg-red-700 blur-[100px] opacity-40 rounded-full bottom-10 right-10" />
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{dummyBlog.title}</h1>
+        {/* Blog Image */}
+        <img
+          src={dummyBlog.image}
+          alt={dummyBlog.title}
+          className="w-full h-64 md:h-96 object-cover rounded-xl mb-8 shadow-md"
+        />
+
+        {/* Blog Title */}
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          {dummyBlog.title}
+        </h1>
         <p className="text-gray-400 text-sm mb-8">
           By {dummyBlog.author} • {new Date(dummyBlog.date).toDateString()}
         </p>
 
+        {/* Markdown Content */}
         <ReactMarkdown
           components={{
             h1: ({ node, ...props }) => <h1 className="text-3xl font-bold my-4" {...props} />,
@@ -61,13 +73,16 @@ const BlogDetailPage = () => {
                 {...props}
               />
             ),
-            ul: ({ node, ...props }) => <ul className="list-disc list-inside text-gray-300 my-2" {...props} />,
+            ul: ({ node, ...props }) => (
+              <ul className="list-disc list-inside text-gray-300 my-2" {...props} />
+            ),
             li: ({ node, ...props }) => <li className="my-1" {...props} />,
           }}
         >
           {dummyBlog.content}
         </ReactMarkdown>
 
+        {/* Like & Comment Count */}
         <div className="flex items-center gap-6 mt-10">
           <button
             onClick={handleLike}
@@ -80,6 +95,7 @@ const BlogDetailPage = () => {
           </div>
         </div>
 
+        {/* Comments */}
         <div className="mt-10">
           <h2 className="text-xl font-semibold mb-4">Comments</h2>
           <div className="space-y-4 mb-6">

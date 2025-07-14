@@ -7,7 +7,7 @@ const Layout = () => {
   return (
     <div className="bg-black min-h-screen">
       <Navbar />
-      <main className="min-h-screen">
+      <main className="min-h-screen overflow-auto">
         <Outlet />
       </main>
       {/* <Footer /> */}

@@ -1,13 +1,15 @@
-import React from "react";
-import { ArrowUpRight } from "lucide-react";
+import React, { useState } from "react";
+import { ArrowUpRight, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
+import Modal from "../../components/Modal";
 
 const blogs = [
   {
     title: "Mastering the MERN Stack in 2025",
     author: "Pranay",
     tags: ["MERN", "JavaScript"],
-    image: "https://source.unsplash.com/featured/?code",
+    image:
+      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=500&auto=format&fit=crop&q=60",
     date: "2025-07-08",
     slug: "mastering-mern-2025",
   },
@@ -15,16 +17,19 @@ const blogs = [
     title: "Building Real-Time Apps with Socket.IO",
     author: "Pranay",
     tags: ["Socket.IO", "Real-time"],
-    image: "https://source.unsplash.com/featured/?realtime",
+    image:
+      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=500&auto=format&fit=crop&q=60",
     date: "2025-07-01",
     slug: "realtime-apps-socketio",
   },
 ];
 
 const BlogMainPage = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <section className="min-h-screen bg-black text-white py-20 px-6 font-poppins relative overflow-hidden">
-      {/* Ambient Blurs */}
+      {/* Blurs */}
       <div className="absolute w-[300px] h-[300px] bg-red-500 blur-[120px] opacity-30 rounded-full top-10 left-10" />
       <div className="absolute w-[200px] h-[200px] bg-red-700 blur-[100px] opacity-40 rounded-full bottom-10 right-10" />
 
@@ -73,6 +78,22 @@ const BlogMainPage = () => {
           </div>
         ))}
       </div>
+
+      <button
+        onClick={() => setShowModal(true)}
+        className="fixed bottom-6 right-6 z-50 bg-red-600 hover:bg-red-500 text-white p-4 rounded-full shadow-lg transition duration-300 flex items-center justify-center"
+        title="Add Blog"
+      >
+        <Plus size={24} />
+      </button>
+
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        title="Add New Blog"
+      >
+        <h1>FORM</h1>
+      </Modal>
     </section>
   );
 };
