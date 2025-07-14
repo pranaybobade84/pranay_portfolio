@@ -37,9 +37,7 @@ const skills = [
 
 const SkillsSection = () => {
   return (
-    <section className="min-h-screen bg-black text-white py-20 px-6 font-poppins relative overflow-hidden">
-      <div className="absolute w-[300px] h-[300px] bg-red-500 blur-[120px] opacity-20 rounded-full top-10 left-10"></div>
-      <div className="absolute w-[200px] h-[200px] bg-red-700 blur-[100px] opacity-30 rounded-full bottom-10 right-10"></div>
+    <section className="min-h-screen  text-white py-20 px-6 font-poppins relative overflow-hidden">
 
       <div className="text-center mb-16 relative z-10">
         <h2 className="text-4xl md:text-6xl font-extrabold uppercase inline-block relative">

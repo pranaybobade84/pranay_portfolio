@@ -15,6 +15,7 @@ import Login from "../pages/auth/Login";
 import RegisterPage from "../pages/auth/Register";
 import ProjectSection from "../pages/Projects";
 import Unauthorized from "../pages/UnAuthorized";
+import ManageSkills from "../Admin/ManageSkills";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
               {
                 path: "blogs",
                 element: <ManageBlogs />,
+              },
+              {
+                path: "skills",
+                element: <ManageSkills />,
               },
             ],
           },

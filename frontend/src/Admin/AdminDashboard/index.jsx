@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  FileText,
-  Award,
-  Briefcase,
-  Users,
-  BarChart2,
-} from "lucide-react";
+import { FileText, Award, Briefcase, Users, BarChart2 } from "lucide-react";
 
 const stats = [
   { title: "Total Blogs", count: 12, icon: FileText },
@@ -16,11 +10,7 @@ const stats = [
 
 const AdminDashboard = () => {
   return (
-    <section className="min-h-screen bg-black text-white py-20 px-6 font-poppins relative overflow-hidden">
-      {/* Ambient Red Blurs */}
-      <div className="absolute w-[300px] h-[300px] bg-red-600 blur-[120px] opacity-30 rounded-full top-10 left-10" />
-      <div className="absolute w-[200px] h-[200px] bg-red-700 blur-[100px] opacity-40 rounded-full bottom-10 right-10" />
-
+    <section className="min-h-screen  text-white py-20 px-6 font-poppins relative overflow-hidden">
       {/* Header */}
       <div className="mb-12 text-center relative z-10">
         <h1 className="text-4xl md:text-5xl font-extrabold uppercase inline-block relative">

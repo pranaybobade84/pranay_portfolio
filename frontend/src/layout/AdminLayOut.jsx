@@ -23,8 +23,8 @@ const navItems = [
 
 const AdminLayout = () => {
   return (
-    <div className="bg-black text-white font-poppins flex">
-      <aside className="fixed top-16 left-0 min-h-screen h-full w-16 md:w-64 bg-black    border-r border-red-600/20 p-4 z-50 transition-all duration-300 flex flex-col items-center md:items-start pt-6">
+    <div className=" text-white font-poppins flex">
+      <aside className="fixed top-16 left-0 min-h-screen h-full w-16 md:w-64 bg-black/60 backdrop-blur-md border-r border-red-600/20 p-4 z-50 transition-all duration-300 flex flex-col items-center md:items-start pt-6 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
         <nav className="space-y-4 w-full">
           {navItems.map(({ name, path, icon: Icon }, index) => (
             <NavLink
@@ -56,9 +56,7 @@ const AdminLayout = () => {
       </aside>
 
       <div className="flex-1 h-full ml-16 md:ml-64 transition-all">
-        <main className="px-4 md:px-10 py-6">
           <Outlet />
-        </main>
       </div>
     </div>
   );

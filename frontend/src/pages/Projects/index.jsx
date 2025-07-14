@@ -24,10 +24,8 @@ const projects = [
 
 const ProjectsSection = () => {
   return (
-    <section className="bg-black text-white py-28 px-6 font-poppins relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-0 left-0 w-60 h-60 bg-pink-500 rounded-full blur-[120px] opacity-20 -z-10" />
-      <div className="absolute bottom-0 right-0 w-40 h-40 bg-yellow-500 rounded-full blur-[90px] opacity-20 -z-10" />
+    <section className=" text-white py-28 px-6 font-poppins relative overflow-hidden">
+     
 
       <div className="text-center mb-28">
         <h2 className="text-5xl md:text-7xl font-extrabold uppercase relative inline-block">

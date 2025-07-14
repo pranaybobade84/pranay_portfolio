@@ -37,7 +37,7 @@ const About = () => {
   };
 
   return (
-    <section className="bg-black text-white min-h-screen px-6 py-20 font-mono relative overflow-hidden">
+    <section className=" text-white min-h-screen px-6 py-20 font-mono relative overflow-hidden">
       <div className="text-center z-10 relative mb-20">
         <p className="mt-4 text-xl md:text-2xl text-gray-400 tracking-widest uppercase italic font-poppins">
           {` < Building Experiences With JavaScript Power />`}

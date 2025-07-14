@@ -2,7 +2,7 @@ import { MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 const Home = () => {
   return (
-    <section className="bg-black text-white min-h-screen flex flex-col justify-between px-6 py-14 font-mono relative overflow-hidden ">
+    <section className=" text-white min-h-screen flex flex-col justify-between px-6 py-14 font-mono relative overflow-hidden ">
       <div className="z-10 relative w-full space-y-6 px-4 md:px-10">
         <div className="w-full">
           <h1 className="text-[48px] sm:text-[72px] md:text-[100px] lg:text-[120px] font-extrabold uppercase leading-none tracking-tight font-poppins text-left mt-3">

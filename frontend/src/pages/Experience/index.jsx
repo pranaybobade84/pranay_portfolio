@@ -97,7 +97,7 @@ const ExperienceSection = () => {
 
 
   return (
-    <section className="min-h-screen bg-black text-white py-20 px-6 font-poppins relative overflow-hidden">
+    <section className="min-h-screen  text-white py-20 px-6 font-poppins relative overflow-hidden">
       <div className="absolute w-[300px] h-[300px] bg-red-500 blur-[120px] opacity-30 rounded-full top-10 left-10"></div>
       <div className="absolute w-[200px] h-[200px] bg-red-700 blur-[100px] opacity-40 rounded-full bottom-10 right-10"></div>
 
