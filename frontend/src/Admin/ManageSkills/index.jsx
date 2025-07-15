@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Pencil, Trash2, Plus } from "lucide-react";
+import Modal from "../../components/Modal";
+import SkillForm from "./SkillsForm";
 
 const dummySkills = [
   {
@@ -24,130 +26,18 @@ const dummySkills = [
 
 const ManageSkills = () => {
   const [skills, setSkills] = useState(dummySkills);
-  const [formData, setFormData] = useState({
-    name: "",
-    category: "Frontend",
-    level: "Intermediate",
-    progressPercent: 70,
-    experienceInYears: 0,
-    type: "tool",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleAddSkill = (e) => {
-    e.preventDefault();
-    const newSkill = {
-      id: Date.now(),
-      ...formData,
-    };
-    setSkills([...skills, newSkill]);
-    setFormData({
-      name: "",
-      category: "Frontend",
-      level: "Intermediate",
-      progressPercent: 70,
-      experienceInYears: 0,
-      type: "tool",
-    });
-  };
+  const [showModal, setShowModal] = useState(false);
 
   const handleDelete = (id) => {
     setSkills(skills.filter((skill) => skill.id !== id));
   };
 
   return (
-    <section className="min-h-screen bg-black text-white py-20 px-6 font-poppins relative overflow-hidden">
+    <section className="min-h-screen  text-white py-20 px-6 font-poppins relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold mb-6 text-red-500">Manage Skills</h2>
 
-        <form
-          onSubmit={handleAddSkill}
-          className="bg-[#111] border border-red-600/20 p-6 rounded-xl shadow-md mb-10 space-y-4"
-        >
-          <div className="grid md:grid-cols-2 gap-4">
-            <input
-              type="text"
-              name="name"
-              placeholder="Skill Name"
-              className="bg-black border border-red-500/30 px-4 py-2 rounded text-white"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-
-            <select
-              name="category"
-              className="bg-black border border-red-500/30 px-4 py-2 rounded text-white"
-              value={formData.category}
-              onChange={handleChange}
-            >
-              <option>Frontend</option>
-              <option>Backend</option>
-              <option>Database</option>
-              <option>DevOps</option>
-              <option>Tools</option>
-              <option>Others</option>
-            </select>
-
-            <select
-              name="level"
-              className="bg-black border border-red-500/30 px-4 py-2 rounded text-white"
-              value={formData.level}
-              onChange={handleChange}
-            >
-              <option>Beginner</option>
-              <option>Intermediate</option>
-              <option>Advanced</option>
-              <option>Expert</option>
-            </select>
-
-            <select
-              name="type"
-              className="bg-black border border-red-500/30 px-4 py-2 rounded text-white"
-              value={formData.type}
-              onChange={handleChange}
-            >
-              <option>language</option>
-              <option>framework</option>
-              <option>library</option>
-              <option>tool</option>
-              <option>other</option>
-            </select>
-
-            <input
-              type="number"
-              name="progressPercent"
-              min="0"
-              max="100"
-              placeholder="Progress %"
-              className="bg-black border border-red-500/30 px-4 py-2 rounded text-white"
-              value={formData.progressPercent}
-              onChange={handleChange}
-            />
-
-            <input
-              type="number"
-              step="0.1"
-              name="experienceInYears"
-              placeholder="Experience in Years"
-              className="bg-black border border-red-500/30 px-4 py-2 rounded text-white"
-              value={formData.experienceInYears}
-              onChange={handleChange}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="bg-red-600 hover:bg-red-500 px-6 py-2 rounded-md font-semibold"
-          >
-            Add Skill
-          </button>
-        </form>
-
+        {/* Skills List */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skills.map((skill) => (
             <div
@@ -176,6 +66,22 @@ const ManageSkills = () => {
           ))}
         </div>
       </div>
+
+      <button
+        onClick={() => setShowModal(true)}
+        className="fixed bottom-6 right-6 bg-red-600 hover:bg-red-500 text-white p-4 rounded-full shadow-xl z-50"
+        title="Add Skill"
+      >
+        <Plus />
+      </button>
+
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        title="Add New Skill"
+      >
+        <SkillForm />
+      </Modal>
     </section>
   );
 };
