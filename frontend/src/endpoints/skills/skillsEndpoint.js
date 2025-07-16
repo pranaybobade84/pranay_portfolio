@@ -18,7 +18,18 @@ export const skillApi = apiSlice.injectEndpoints({
       transformResponse: (res) => res?.skills,
       providesTags: ["Skills"],
     }),
+    deleteSkill: builder.mutation({
+      query: (id) => ({
+        url: `/skills/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Skills"],
+    }),
   }),
 });
 
-export const { useAddSkillMutation, useGetAllSkillsQuery } = skillApi;
+export const {
+  useAddSkillMutation,
+  useGetAllSkillsQuery,
+  useDeleteSkillMutation,
+} = skillApi;

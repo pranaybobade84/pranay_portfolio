@@ -4,6 +4,7 @@ import Modal from "../../components/Modal";
 import SkillForm from "./SkillsForm";
 import {
   useAddSkillMutation,
+  useDeleteSkillMutation,
   useGetAllSkillsQuery,
 } from "../../endpoints/skills/skillsEndpoint";
 import { toast } from "react-toastify";
@@ -11,17 +12,26 @@ import { toast } from "react-toastify";
 const ManageSkills = () => {
   const [showModal, setShowModal] = useState(false);
   const [addSkills] = useAddSkillMutation();
+  const [deleteSkill] = useDeleteSkillMutation();
 
   const {
-    data:skills=[],
+    data: skills = [],
     isLoading,
     isError,
     error,
     refetch,
   } = useGetAllSkillsQuery();
 
+  const handleDelete = async (id) => {
+    if (!id) return;
 
-  const handleDelete = (id) => {
+    try {
+      const res = await deleteSkill(id).unwrap();
+      toast.success(res?.message || "Skill deleted successfully");
+      refetch();
+    } catch (err) {
+      toast.error(err?.data?.message || "Failed to delete skill.");
+    }
   };
 
   const handleSubmit = async (formData) => {
@@ -77,15 +87,15 @@ const ManageSkills = () => {
                       </button>
                       <button
                         onClick={() => handleDelete(skill._id || skill.id)}
-                        className="text-red-500 hover:text-white"
+                        className="text-red-500 hover:text-white cursor-pointer"
                       >
                         <Trash2 size={18} />
                       </button>
                     </div>
                   </div>
                   <p className="text-gray-400 text-sm">
-                    {skill.category} • {skill.level} •{" "}
-                    {skill.progressPercent}% • {skill.experienceInYears} yrs
+                    {skill.category} • {skill.level} • {skill.progressPercent}%
+                    • {skill.experienceInYears} yrs
                   </p>
                 </div>
               ))
