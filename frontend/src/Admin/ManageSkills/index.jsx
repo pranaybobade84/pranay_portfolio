@@ -6,13 +6,17 @@ import {
   useAddSkillMutation,
   useDeleteSkillMutation,
   useGetAllSkillsQuery,
+  useUpdateSkillMutation,
 } from "../../endpoints/skills/skillsEndpoint";
 import { toast } from "react-toastify";
 
 const ManageSkills = () => {
+  const [formType, setFormType] = useState(null);
+  const [selectedSkill, setSelectedSkill] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [addSkills] = useAddSkillMutation();
   const [deleteSkill] = useDeleteSkillMutation();
+  const [updateSkill] = useUpdateSkillMutation();
 
   const {
     data: skills = [],
@@ -36,13 +40,24 @@ const ManageSkills = () => {
 
   const handleSubmit = async (formData) => {
     try {
-      const res = await addSkills(formData).unwrap();
+      let res;
+      if (formType === "edit" && selectedSkill?._id) {
+        res = await updateSkill({
+          id: selectedSkill?._id,
+         ...formData,
+        }).unwrap();
+      } else {
+        res = await addSkills(formData).unwrap();
+      }
+
       if (res?.skill) {
-        toast.success(res?.message || "Added successfully");
+        toast.success(res?.message || "Success");
         setShowModal(false);
+        setSelectedSkill(null);
+        refetch();
       }
     } catch (err) {
-      toast.error(err?.data?.message || "Failed to add skill.");
+      toast.error(err?.data?.message || "Failed to submit skill.");
     }
   };
 
@@ -82,7 +97,14 @@ const ManageSkills = () => {
                       {skill.name}
                     </h3>
                     <div className="flex gap-2">
-                      <button className="text-blue-400 hover:text-white">
+                      <button
+                        className="text-blue-400 hover:text-white cursor-pointer"
+                        onClick={() => {
+                          setFormType("edit");
+                          setSelectedSkill(skill);
+                          setShowModal(true);
+                        }}
+                      >
                         <Pencil size={18} />
                       </button>
                       <button
@@ -105,7 +127,10 @@ const ManageSkills = () => {
       </div>
 
       <button
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          setShowModal(true);
+          setFormType("add");
+        }}
         className="fixed bottom-6 right-6 bg-red-600 hover:bg-red-500 text-white p-4 rounded-full shadow-xl z-50"
         title="Add Skill"
       >
@@ -114,10 +139,17 @@ const ManageSkills = () => {
 
       <Modal
         isOpen={showModal}
-        onClose={() => setShowModal(false)}
-        title="Add New Skill"
+        onClose={() => {
+          setShowModal(false);
+          setSelectedSkill(null);
+        }}
+        title={formType === "edit" ? "Edit Skill" : "Add New Skill"}
       >
-        <SkillForm onSubmit={handleSubmit} />
+        <SkillForm
+          onSubmit={handleSubmit}
+          formType={formType}
+          defaultValues={selectedSkill}
+        />
       </Modal>
     </section>
   );

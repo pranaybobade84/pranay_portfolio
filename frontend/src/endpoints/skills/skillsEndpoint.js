@@ -11,10 +11,7 @@ export const skillApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Skills"],
     }),
     getAllSkills: builder.query({
-      query: () => ({
-        url: "/skills",
-        method: "GET",
-      }),
+      query: () => "/skills",
       transformResponse: (res) => res?.skills,
       providesTags: ["Skills"],
     }),
@@ -25,6 +22,14 @@ export const skillApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Skills"],
     }),
+    updateSkill: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `/skills/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Skills"],
+    }),
   }),
 });
 
@@ -32,4 +37,5 @@ export const {
   useAddSkillMutation,
   useGetAllSkillsQuery,
   useDeleteSkillMutation,
+  useUpdateSkillMutation,
 } = skillApi;
