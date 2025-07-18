@@ -20,6 +20,6 @@ skillsRouter
   .route("/:id")
   .delete(verifyToken, authorizeRoles("admin"), deleteSkill);
 
-skillsRouter.route("/").get(verifyToken, authorizeRoles("admin"), getAllSkills);
+skillsRouter.route("/").get(  getAllSkills);
 
 export default skillsRouter;

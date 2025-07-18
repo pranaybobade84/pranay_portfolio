@@ -1,44 +1,27 @@
 import React from "react";
 import SkillCard from "./Card/index";
-
-const skills = [
-  {
-    name: "JavaScript",
-    category: "Frontend",
-    level: "Expert",
-    progressPercent: 90,
-  },
-  {
-    name: "React",
-    category: "Frontend",
-    level: "Advanced",
-    progressPercent: 85,
-  },
-  {
-    name: "Node.js",
-    category: "Backend",
-    level: "Advanced",
-    progressPercent: 80,
-  },
-  {
-    name: "MongoDB",
-    category: "Database",
-    level: "Intermediate",
-    progressPercent: 75,
-  },
-  { name: "Git", category: "Tools", level: "Advanced", progressPercent: 88 },
-  {
-    name: "Docker",
-    category: "DevOps",
-    level: "Beginner",
-    progressPercent: 40,
-  },
-];
+import { useGetAllSkillsQuery } from "../../endpoints/skills/skillsEndpoint";
+import NotFoundMessage from "../../components/NotFoundMessage";
 
 const SkillsSection = () => {
-  return (
-    <section className="min-h-screen  text-white py-20 px-6 font-poppins relative overflow-hidden">
+  const {
+    data: skills = [],
+    isLoading,
+    isError,
+    error,
+  } = useGetAllSkillsQuery();
 
+  const sortedSkills = skills
+    ?.filter((skill) => skill.isVisible)
+    ?.sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0));
+
+  if( !isLoading && !isError && sortedSkills?.length === 0){
+    return (
+        <NotFoundMessage message="SKILLS NOT FOUND" />
+    )
+  }
+  return (
+    <section className="min-h-screen text-white py-20 px-6 font-poppins relative overflow-hidden">
       <div className="text-center mb-16 relative z-10">
         <h2 className="text-4xl md:text-6xl font-extrabold uppercase inline-block relative">
           Skills
@@ -50,9 +33,24 @@ const SkillsSection = () => {
       </div>
 
       <div className="grid gap-10 max-w-6xl mx-auto relative z-10 md:grid-cols-2 lg:grid-cols-3">
-        {skills.map((skill, index) => (
-          <SkillCard key={index} {...skill} />
-        ))}
+        {isLoading && (
+          <div className="col-span-full text-center text-xl animate-pulse">
+            Loading skills...
+          </div>
+        )}
+
+        {isError && (
+          <div className="col-span-full text-center text-red-500">
+            {error?.data?.message ||
+              "Something went wrong while fetching skills."}
+          </div>
+        )}
+
+        {!isLoading &&
+          !isError &&
+          sortedSkills?.map((skill, index) => (
+            <SkillCard key={index} {...skill} />
+          ))}
       </div>
     </section>
   );
