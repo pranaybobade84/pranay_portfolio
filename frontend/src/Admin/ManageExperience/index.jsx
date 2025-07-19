@@ -3,6 +3,7 @@ import { Pencil, Trash2, CheckCircle2, EyeOff, Plus } from "lucide-react";
 import { toast } from "react-toastify";
 import AddButton from "../../components/FixedButton";
 import Modal from "../../components/Modal";
+import SectionHeading from "../../components/Heading";
 
 const ManageExperience = () => {
   const [experiences, setExperiences] = useState([
@@ -65,10 +66,8 @@ const ManageExperience = () => {
   };
 
   return (
-    <div className="p-4 pb-28 relative">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-red-500 text-center md:text-left">
-        Manage Experience
-      </h2>
+    <div className="p-4 relative">
+      <SectionHeading>Manage Experience</SectionHeading>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {experiences.map((exp) => (

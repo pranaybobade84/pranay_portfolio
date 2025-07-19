@@ -18,6 +18,7 @@ import Unauthorized from "../pages/UnAuthorized";
 import ManageSkills from "../Admin/ManageSkills";
 import ManageExperience from "../Admin/ManageExperience";
 import ManageProjects from "../Admin/ManageProjects";
+import ManageAbout from "../Admin/ManageAbout";
 
 const router = createBrowserRouter([
   {
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
               {
                 path: "project",
                 element: <ManageProjects />,
+              },
+              {
+                path: "about",
+                element: <ManageAbout />,
               },
             ],
           },

@@ -10,6 +10,7 @@ import {
 } from "../../endpoints/skills/skillsEndpoint";
 import { toast } from "react-toastify";
 import AddButton from "../../components/FixedButton";
+import SectionHeading from "../../components/Heading";
 
 const ManageSkills = () => {
   const [formType, setFormType] = useState(null);
@@ -63,10 +64,9 @@ const ManageSkills = () => {
   };
 
   return (
-    <section className="min-h-screen text-white  px-6 font-poppins relative overflow-hidden">
+    <section className="p-4 relative">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6 text-red-500">Manage Skills</h2>
-
+        <SectionHeading>Manage Skills</SectionHeading>
         {isLoading && (
           <p className="text-gray-300 text-center py-10">Loading skills...</p>
         )}

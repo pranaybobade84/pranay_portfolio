@@ -55,7 +55,7 @@ const AdminLayout = () => {
         </button>
       </aside>
 
-      <div className="flex-1 h-full ml-16 md:ml-64 transition-all mt-20">
+      <div className="flex-1 h-full ml-16 md:ml-64 transition-all mt-[70px]">
           <Outlet />
       </div>
     </div>
