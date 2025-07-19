@@ -16,6 +16,7 @@ import RegisterPage from "../pages/auth/Register";
 import ProjectSection from "../pages/Projects";
 import Unauthorized from "../pages/UnAuthorized";
 import ManageSkills from "../Admin/ManageSkills";
+import ManageExperience from "../Admin/ManageExperience";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
               {
                 path: "skills",
                 element: <ManageSkills />,
+              },
+              {
+                path: "experience",
+                element: <ManageExperience />,
               },
             ],
           },

@@ -1,14 +1,15 @@
 import React from "react";
 import { FileText, Award, Briefcase, Users, BarChart2 } from "lucide-react";
-
-const stats = [
-  { title: "Total Blogs", count: 12, icon: FileText },
-  { title: "Skills Listed", count: 15, icon: Award },
-  { title: "Experiences", count: 4, icon: Briefcase },
-  { title: "Users Registered", count: 27, icon: Users },
-];
+import { useGetAllSkillsQuery } from "../../endpoints/skills/skillsEndpoint";
 
 const AdminDashboard = () => {
+  const { data: skills = [] } = useGetAllSkillsQuery();
+  const stats = [
+    { title: "Total Blogs", count: 12, icon: FileText },
+    { title: "Skills Listed", count: skills?.length || 0, icon: Award },
+    { title: "Experiences", count: 4, icon: Briefcase },
+    { title: "Users Registered", count: 27, icon: Users },
+  ];
   return (
     <section className="min-h-screen  text-white py-20 px-6 font-poppins relative overflow-hidden">
       {/* Header */}
@@ -24,7 +25,7 @@ const AdminDashboard = () => {
 
       {/* Overview Cards */}
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto relative z-10">
-        {stats.map(({ title, count, icon: Icon }, i) => (
+        {stats?.map(({ title, count, icon: Icon }, i) => (
           <div
             key={i}
             className="bg-[#111] p-6 rounded-xl border border-red-500/20 shadow-md hover:shadow-red-500/30 transition"

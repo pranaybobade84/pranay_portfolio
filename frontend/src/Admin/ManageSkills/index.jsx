@@ -9,6 +9,7 @@ import {
   useUpdateSkillMutation,
 } from "../../endpoints/skills/skillsEndpoint";
 import { toast } from "react-toastify";
+import AddButton from "../../components/FixedButton";
 
 const ManageSkills = () => {
   const [formType, setFormType] = useState(null);
@@ -44,7 +45,7 @@ const ManageSkills = () => {
       if (formType === "edit" && selectedSkill?._id) {
         res = await updateSkill({
           id: selectedSkill?._id,
-         ...formData,
+          ...formData,
         }).unwrap();
       } else {
         res = await addSkills(formData).unwrap();
@@ -62,7 +63,7 @@ const ManageSkills = () => {
   };
 
   return (
-    <section className="min-h-screen text-white py-20 px-6 font-poppins relative overflow-hidden">
+    <section className="min-h-screen text-white  px-6 font-poppins relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold mb-6 text-red-500">Manage Skills</h2>
 
@@ -125,18 +126,12 @@ const ManageSkills = () => {
           </div>
         )}
       </div>
-
-      <button
+      <AddButton
         onClick={() => {
           setShowModal(true);
           setFormType("add");
         }}
-        className="fixed bottom-6 right-6 bg-red-600 hover:bg-red-500 text-white p-4 rounded-full shadow-xl z-50"
-        title="Add Skill"
-      >
-        <Plus />
-      </button>
-
+      />
       <Modal
         isOpen={showModal}
         onClose={() => {
