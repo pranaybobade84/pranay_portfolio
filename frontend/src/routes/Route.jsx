@@ -17,6 +17,7 @@ import ProjectSection from "../pages/Projects";
 import Unauthorized from "../pages/UnAuthorized";
 import ManageSkills from "../Admin/ManageSkills";
 import ManageExperience from "../Admin/ManageExperience";
+import ManageProjects from "../Admin/ManageProjects";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
               {
                 path: "experience",
                 element: <ManageExperience />,
+              },
+              {
+                path: "project",
+                element: <ManageProjects />,
               },
             ],
           },
