@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { X } from "lucide-react";
 
-const Modal = ({ isOpen, onClose, title, children, width = "max-w-2xl" }) => {
+const Modal = ({ isOpen, onClose, title, children }) => {
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") onClose();
@@ -21,7 +21,7 @@ const Modal = ({ isOpen, onClose, title, children, width = "max-w-2xl" }) => {
         className={`bg-[#111] w-full  max-h-[90vh] rounded-xl shadow-xl border border-red-600/30 relative flex flex-col`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
+      
         <div className="flex items-center justify-between border-b border-red-600/20 px-6 py-4 sticky top-0 bg-[#111] z-10">
           <h3 className="text-lg font-semibold text-white">{title}</h3>
           <button
@@ -31,8 +31,6 @@ const Modal = ({ isOpen, onClose, title, children, width = "max-w-2xl" }) => {
             <X size={22} />
           </button>
         </div>
-
-        {/* Scrollable Content */}
         <div className="overflow-y-auto p-6 custom-scrollbar">
           {children}
         </div>

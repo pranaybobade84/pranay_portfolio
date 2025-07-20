@@ -9,11 +9,11 @@ import {
   useGetAllExperienceQuery,
   useDeleteExperienceMutation,
 } from "../../endpoints/Experience/experienceEndpoint";
-// import Loader from "../../components/Loader";
-// import ErrorMessage from "../../components/ErrorMessage";
+import { ShimmerLoader } from "../../components/Loader";
+import NotFoundMessage from "../../components/NotFoundMessage";
 
 const ManageExperience = () => {
-  const { data, isLoading, isError } = useGetAllExperienceQuery();
+  const { data, isLoading } = useGetAllExperienceQuery();
   const [deleteExperience] = useDeleteExperienceMutation();
   const [editing, setEditing] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -28,8 +28,17 @@ const ManageExperience = () => {
     }
   };
 
-  // if (isLoading) return <Loader />;
-  // if (isError) return <ErrorMessage message="Failed to load experiences" />;
+  let isError = true;
+
+  if (isLoading)
+    return (
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+        {[...Array(4)].map((_, index) => (
+          <ShimmerLoader key={index} />
+        ))}
+      </div>
+    );
+  if (isError) return <NotFoundMessage message="Failed to load experiences" />;
   return (
     <div className="p-4 relative">
       <SectionHeading>Manage Experience</SectionHeading>

@@ -11,6 +11,8 @@ import {
 import { toast } from "react-toastify";
 import AddButton from "../../components/FixedButton";
 import SectionHeading from "../../components/Heading";
+import { ShimmerLoader } from "../../components/Loader";
+import NotFoundMessage from "../../components/NotFoundMessage";
 
 const ManageSkills = () => {
   const [formType, setFormType] = useState(null);
@@ -63,25 +65,20 @@ const ManageSkills = () => {
     }
   };
 
+  if (isLoading)
+    return (
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+        {[...Array(4)].map((_, index) => (
+          <ShimmerLoader key={index} />
+        ))}
+      </div>
+    );
+  if (isError) return <NotFoundMessage message="Failed to load experiences" />;
+
   return (
     <section className="p-4 relative">
       <div className="max-w-6xl mx-auto">
         <SectionHeading>Manage Skills</SectionHeading>
-        {isLoading && (
-          <p className="text-gray-300 text-center py-10">Loading skills...</p>
-        )}
-
-        {isError && (
-          <div className="text-center text-red-500 py-10">
-            <p>Error loading skills: {error?.data?.message || error?.error}</p>
-            <button
-              onClick={refetch}
-              className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded"
-            >
-              Retry
-            </button>
-          </div>
-        )}
 
         {!isLoading && !isError && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -1,8 +1,11 @@
 import { AlertTriangle } from "lucide-react";
 
-const NotFoundMessage = ({ message = "No data found." }) => {
+const NotFoundMessage = ({
+  message = "No data found.",
+  height = "min-h-screen",
+}) => {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className={`h-${height} flex items-center justify-center px-4`}>
       <div className="text-center text-gray-400  rounded-2xl p-8 shadow-md transition-opacity duration-500 ease-out animate-fade-in">
         <AlertTriangle className="w-12 h-12 text-yellow-500 mb-4 mx-auto animate-pulse" />
         <h3 className="text-2xl font-semibold text-white">{message}</h3>
