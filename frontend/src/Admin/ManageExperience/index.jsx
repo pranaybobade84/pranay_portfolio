@@ -4,73 +4,38 @@ import { toast } from "react-toastify";
 import AddButton from "../../components/FixedButton";
 import Modal from "../../components/Modal";
 import SectionHeading from "../../components/Heading";
+import ExperienceForm from "./ExperienceForm";
+import {
+  useGetAllExperienceQuery,
+  useDeleteExperienceMutation,
+} from "../../endpoints/Experience/experienceEndpoint";
+// import Loader from "../../components/Loader";
+// import ErrorMessage from "../../components/ErrorMessage";
 
 const ManageExperience = () => {
-  const [experiences, setExperiences] = useState([
-    {
-      _id: "exp1",
-      companyName: "TechNova Solutions",
-      position: "MERN Stack Developer Intern",
-      employmentType: "Internship",
-      location: "Pune, Maharashtra",
-      industry: "Information Technology",
-      startDate: "2024-01-15T00:00:00.000Z",
-      endDate: "2024-06-15T00:00:00.000Z",
-      currentlyWorking: false,
-      description:
-        "Worked on scalable full-stack web apps using MERN stack. Contributed to APIs, UI improvements, and real-time features.",
-      techStack: ["MongoDB", "Express", "React", "Node.js", "Socket.IO"],
-      achievements: [
-        "Improved API performance by 30%",
-        "Implemented real-time notifications using Socket.IO",
-      ],
-      website: "https://technovasolutions.com",
-      isVisible: true,
-    },
-    {
-      _id: "exp2",
-      companyName: "CodeCrafters Inc.",
-      position: "Frontend Developer",
-      employmentType: "Full-time",
-      location: "Remote",
-      industry: "Software Development",
-      startDate: "2024-07-01T00:00:00.000Z",
-      endDate: null,
-      currentlyWorking: true,
-      description:
-        "Building responsive and accessible UI with React + TailwindCSS. Leading frontend performance and TypeScript migration.",
-      techStack: ["React", "Redux", "TailwindCSS", "TypeScript", "Vite"],
-      achievements: [
-        "Reduced bundle size by 40%",
-        "Led migration to TypeScript",
-      ],
-      website: "https://codecrafters.io",
-      isVisible: true,
-    },
-  ]);
-
+  const { data, isLoading, isError } = useGetAllExperienceQuery();
+  const [deleteExperience] = useDeleteExperienceMutation();
   const [editing, setEditing] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const handleDelete = (id) => {
-    setExperiences((prev) => prev.filter((exp) => exp._id !== id));
-    toast.success("Experience deleted");
+  console.log("eidt", editing);
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteExperience(id).unwrap();
+      toast.success("Experience deleted");
+    } catch (error) {
+      toast.error("Failed to delete experience");
+    }
   };
 
-  const toggleVisibility = (id, current) => {
-    setExperiences((prev) =>
-      prev.map((exp) =>
-        exp._id === id ? { ...exp, isVisible: !current } : exp
-      )
-    );
-    toast.success("Visibility toggled");
-  };
-
+  // if (isLoading) return <Loader />;
+  // if (isError) return <ErrorMessage message="Failed to load experiences" />;
   return (
     <div className="p-4 relative">
       <SectionHeading>Manage Experience</SectionHeading>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {experiences.map((exp) => (
+        {data?.experiences?.map((exp) => (
           <div
             key={exp._id}
             className="bg-[#1a1a1a] text-white p-5 rounded-2xl border border-red-500/20 shadow hover:shadow-red-500/30 transition-shadow duration-300"
@@ -106,45 +71,51 @@ const ManageExperience = () => {
               {exp.description}
             </p>
 
-            <div className="mt-4">
-              <p className="text-sm font-semibold text-gray-200 mb-1">
-                Tech Stack:
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {exp.techStack.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="px-3 py-1 rounded-full bg-red-600/20 text-red-300 text-xs"
-                  >
-                    {tech}
-                  </span>
-                ))}
+            {exp.techStack?.length > 0 && (
+              <div className="mt-4">
+                <p className="text-sm font-semibold text-gray-200 mb-1">
+                  Tech Stack:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {exp.techStack.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 rounded-full bg-red-600/20 text-red-300 text-xs"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
-            <div className="mt-4">
-              <p className="text-sm font-semibold text-gray-200 mb-1">
-                Achievements:
-              </p>
-              <ul className="list-disc pl-5 text-xs text-green-400 space-y-1">
-                {exp.achievements.map((ach, idx) => (
-                  <li key={idx}>{ach}</li>
-                ))}
-              </ul>
-            </div>
+            {exp.achievements?.length > 0 && (
+              <div className="mt-4">
+                <p className="text-sm font-semibold text-gray-200 mb-1">
+                  Achievements:
+                </p>
+                <ul className="list-disc pl-5 text-xs text-green-400 space-y-1">
+                  {exp.achievements.map((ach, idx) => (
+                    <li key={idx}>{ach}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <div className="flex flex-wrap justify-between items-center mt-4 gap-3">
-              <a
-                href={exp.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-400 text-xs hover:underline break-all"
-              >
-                {exp.website}
-              </a>
+              {exp.website && (
+                <a
+                  href={exp.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 text-xs hover:underline break-all"
+                >
+                  {exp.website}
+                </a>
+              )}
 
               <button
-                onClick={() => toggleVisibility(exp._id, exp.isVisible)}
+                // onClick={() => handleToggleVisibility(exp._id, exp.isVisible)}
                 className={`text-xs flex items-center gap-1 px-3 py-1 rounded-full transition-all duration-300 ${
                   exp.isVisible
                     ? "bg-green-700 hover:bg-green-800"
@@ -173,12 +144,21 @@ const ManageExperience = () => {
       />
 
       <Modal
-        isOpen={showModal}
+        isOpen={showModal || !!editing}
         onClose={() => {
           setShowModal(false);
+          setEditing(null);
         }}
-        title={"Add Exp"}
-      ></Modal>
+        title={editing ? "Edit Experience" : "Add Experience"}
+      >
+        <ExperienceForm
+          onClose={() => {
+            setShowModal(false);
+            setEditing(null);
+          }}
+          existingData={editing}
+        />
+      </Modal>
     </div>
   );
 };

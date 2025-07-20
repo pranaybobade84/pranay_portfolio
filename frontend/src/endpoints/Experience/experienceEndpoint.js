@@ -19,7 +19,7 @@ export const experienceApi = apiSlice.injectEndpoints({
     editExperience: builder.mutation({
       query: ({ id, ...body }) => ({
         url: `/experience/${id}`,
-        method: "PUT",
+        method: "PATCH",
         body,
       }),
       invalidatesTags: ["Experience"],

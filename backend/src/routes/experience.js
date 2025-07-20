@@ -24,6 +24,6 @@ experienceRouter
 
 experienceRouter
   .route("/")
-  .get(verifyToken, authorizeRoles("admin"), getAllExperiences);
+  .get(  getAllExperiences);
 
 export default experienceRouter;

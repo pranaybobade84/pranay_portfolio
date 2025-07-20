@@ -24,6 +24,18 @@ const createExperience = asyncHandler(async (req, res) => {
     });
   }
 
+  const alreadyExists = await Experience.findOne({
+    companyName,
+    position,
+    startDate,
+  });
+
+  if (alreadyExists) {
+    return res.status(409).json({
+      message: "Experience with same company, position, and start date already exists.",
+    });
+  }
+
   const experience = await Experience.create({
     companyName,
     position,
@@ -45,6 +57,7 @@ const createExperience = asyncHandler(async (req, res) => {
     experience,
   });
 });
+
 
 const updateExperience = asyncHandler(async (req, res) => {
   const { id } = req.params;
@@ -95,7 +108,7 @@ const updateExperience = asyncHandler(async (req, res) => {
 
 const getAllExperiences = asyncHandler(async (req, res) => {
   const experiences = await Experience.find().sort({ startDate: -1 });
-  if (!experience) {
+  if (!experiences) {
     return res.status(404).json({ message: "Experience not found" });
   }
   res.status(200).json({

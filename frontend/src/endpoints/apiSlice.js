@@ -5,6 +5,6 @@ import { BASE_API } from "../utils/constants";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_API, credentials: "include" }),
-  tagTypes: ["Skills"],
+  tagTypes: ["Skills","Experience"],
   endpoints: () => ({}),
 });
