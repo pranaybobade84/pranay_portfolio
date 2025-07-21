@@ -4,27 +4,9 @@ import {
   useAddExperienceMutation,
   useEditExperienceMutation,
 } from "../../../endpoints/Experience/experienceEndpoint";
-
-const TextInput = ({
-  label,
-  name,
-  value,
-  onChange,
-  type = "text",
-  ...rest
-}) => (
-  <div>
-    <label className="text-sm text-gray-300">{label}</label>
-    <input
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      className="w-full bg-zinc-900 text-white p-3 rounded-lg border border-gray-700 focus:ring-1 focus:ring-red-600"
-      {...rest}
-    />
-  </div>
-);
+import TextInput from "../../components/TextInput";
+import SelectInput from "../../components/SelectInput";
+import CheckboxInput from "../../components/CheckBox";
 
 const TextAreaInput = ({ label, name, value, onChange }) => (
   <div>
@@ -36,35 +18,6 @@ const TextAreaInput = ({ label, name, value, onChange }) => (
       rows={3}
       className="w-full bg-zinc-900 text-white p-3 rounded-lg border border-gray-700"
     />
-  </div>
-);
-
-const SelectInput = ({ label, name, value, onChange, options }) => (
-  <div>
-    <label className="text-sm text-gray-300">{label}</label>
-    <select
-      name={name}
-      value={value}
-      onChange={onChange}
-      className="w-full bg-zinc-900 text-white p-3 rounded-lg border border-gray-700"
-    >
-      {options.map((opt) => (
-        <option key={opt}>{opt}</option>
-      ))}
-    </select>
-  </div>
-);
-
-const CheckboxInput = ({ label, name, checked, onChange }) => (
-  <div className="flex items-center space-x-2">
-    <input
-      type="checkbox"
-      name={name}
-      checked={checked}
-      onChange={onChange}
-      className="accent-red-600"
-    />
-    <label className="text-sm text-gray-300">{label}</label>
   </div>
 );
 

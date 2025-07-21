@@ -13,11 +13,10 @@ import { ShimmerLoader } from "../../components/Loader";
 import NotFoundMessage from "../../components/NotFoundMessage";
 
 const ManageExperience = () => {
-  const { data, isLoading } = useGetAllExperienceQuery();
+  const { data, isLoading,isError } = useGetAllExperienceQuery();
   const [deleteExperience] = useDeleteExperienceMutation();
   const [editing, setEditing] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  console.log("eidt", editing);
 
   const handleDelete = async (id) => {
     try {
@@ -28,7 +27,6 @@ const ManageExperience = () => {
     }
   };
 
-  let isError = true;
 
   if (isLoading)
     return (
