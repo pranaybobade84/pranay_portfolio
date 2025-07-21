@@ -2,6 +2,7 @@ import React from "react";
 import SkillCard from "./Card/index";
 import { useGetAllSkillsQuery } from "../../endpoints/skills/skillsEndpoint";
 import NotFoundMessage from "../../components/NotFoundMessage";
+import { ShimmerLoader } from "../../components/Loader";
 
 const SkillsSection = () => {
   const {
@@ -15,11 +16,18 @@ const SkillsSection = () => {
     ?.filter((skill) => skill.isVisible)
     ?.sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0));
 
-  if( !isLoading && !isError && sortedSkills?.length === 0){
-    return (
-        <NotFoundMessage message="SKILLS NOT FOUND" />
-    )
+  if (!isLoading && !isError && sortedSkills?.length === 0) {
+    return <NotFoundMessage message="SKILLS NOT FOUND" />;
   }
+
+  if (isLoading)
+    return (
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 mt-10">
+        {[...Array(6)].map((_, index) => (
+          <ShimmerLoader key={index} />
+        ))}
+      </div>
+    );
   return (
     <section className="min-h-screen text-white py-20 px-6 font-poppins relative overflow-hidden">
       <div className="text-center mb-16 relative z-10">
@@ -33,12 +41,6 @@ const SkillsSection = () => {
       </div>
 
       <div className="grid gap-10 max-w-6xl mx-auto relative z-10 md:grid-cols-2 lg:grid-cols-3">
-        {isLoading && (
-          <div className="col-span-full text-center text-xl animate-pulse">
-            Loading skills...
-          </div>
-        )}
-
         {isError && (
           <div className="col-span-full text-center text-red-500">
             {error?.data?.message ||
