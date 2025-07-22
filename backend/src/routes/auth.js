@@ -9,7 +9,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 userRouter.route("/register").post(upload.single("avatar"), registerUser);
 
 userRouter.route("/login").post(login);
-userRouter.route("/logout").get(verifyToken, logout);
+userRouter.route("/logout").post(verifyToken, logout);
 userRouter.get(
   "/verify-token",
   verifyToken,

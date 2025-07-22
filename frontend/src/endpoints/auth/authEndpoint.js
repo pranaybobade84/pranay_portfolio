@@ -25,7 +25,18 @@ export const authApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+    logout: builder.mutation({
+      query:()=>({
+        url:'/admin/logout',
+        method:"POST"
+      })
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation,useVerifyTokenQuery } = authApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useVerifyTokenQuery,
+  useLogoutMutation,
+} = authApi;

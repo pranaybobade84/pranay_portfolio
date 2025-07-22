@@ -19,6 +19,7 @@ import ManageSkills from "../Admin/ManageSkills";
 import ManageExperience from "../Admin/ManageExperience";
 import ManageProjects from "../Admin/ManageProjects";
 import ManageAbout from "../Admin/ManageAbout";
+import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
             ],
           },
         ],
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

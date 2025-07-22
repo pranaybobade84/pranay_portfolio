@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Info,
@@ -10,6 +10,8 @@ import {
   MessageCircle,
   LogOut,
 } from "lucide-react";
+import { useLogoutMutation } from "../endpoints/auth/authEndpoint";
+import { toast } from "react-toastify";
 
 const navItems = [
   { name: "Dashboard", path: "/admin", icon: LayoutDashboard },
@@ -22,6 +24,18 @@ const navItems = [
 ];
 
 const AdminLayout = () => {
+  const [logout] = useLogoutMutation();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+      localStorage.clear();
+      toast.success("Logged out ✅");
+      navigate("/login");
+    } catch (err) {
+      toast.error("Logout failed");
+    }
+  };
   return (
     <div className=" text-white font-poppins flex">
       <aside className="fixed top-16 left-0 min-h-screen h-full w-16 md:w-64 bg-black/60 backdrop-blur-md border-r border-red-600/20 p-4 z-50 transition-all duration-300 flex flex-col items-center md:items-start pt-6 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
@@ -31,7 +45,7 @@ const AdminLayout = () => {
               key={index}
               to={path}
               end
-              title={name} 
+              title={name}
               className={({ isActive }) =>
                 `group relative flex items-center md:justify-start justify-center gap-3 px-0 md:px-4 py-2 rounded-lg transition text-sm font-medium ${
                   isActive
@@ -49,6 +63,7 @@ const AdminLayout = () => {
         <button
           title="Logout"
           className="mt-5 flex items-center md:justify-start justify-center gap-2 text-red-500 text-sm hover:text-yellow-400 w-full px-0 md:px-4 py-2 cursor-pointer"
+          onClick={handleLogout}
         >
           <LogOut size={16} />
           <span className="hidden md:inline">Logout</span>
@@ -56,7 +71,7 @@ const AdminLayout = () => {
       </aside>
 
       <div className="flex-1 h-full ml-16 md:ml-64 transition-all mt-[70px]">
-          <Outlet />
+        <Outlet />
       </div>
     </div>
   );
