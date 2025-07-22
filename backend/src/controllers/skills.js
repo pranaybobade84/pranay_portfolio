@@ -68,7 +68,7 @@ const getAllSkills = asyncHandler(async (req, res) => {
   const { visibleOnly } = req.query;
 
   const filter = visibleOnly === "true" ? { isVisible: true } : {};
-  const skills = await Skill.find(filter).sort({ order: 1, createdAt: -1 });
+  const skills = await Skill.find(filter)
   if (!skills) return res.status(404).json({ message: "Skills not found" });
 
   res
