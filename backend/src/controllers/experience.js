@@ -32,7 +32,8 @@ const createExperience = asyncHandler(async (req, res) => {
 
   if (alreadyExists) {
     return res.status(409).json({
-      message: "Experience with same company, position, and start date already exists.",
+      message:
+        "Experience with same company, position, and start date already exists.",
     });
   }
 
@@ -57,7 +58,6 @@ const createExperience = asyncHandler(async (req, res) => {
     experience,
   });
 });
-
 
 const updateExperience = asyncHandler(async (req, res) => {
   const { id } = req.params;
@@ -133,9 +133,24 @@ const deleteExperience = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Experience deleted successfully" });
 });
 
+const getExperienceById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({ message: "Experience ID is required" });
+  }
+
+  const experience = await Experience.findById(id);
+  if (!experience) {
+    return res.status(400).json({ message: "Experience not found" });
+  }
+
+  res.status(200).json({ experience });
+});
+
 export {
   createExperience,
   updateExperience,
   getAllExperiences,
   deleteExperience,
+  getExperienceById,
 };

@@ -15,6 +15,10 @@ export const experienceApi = apiSlice.injectEndpoints({
       query: () => "/experience",
       providesTags: ["Experience"],
     }),
+    getExperienceDetail: builder.query({
+      query: (id) => `/experience/${id}`,
+      providesTags: ["Experience"],
+    }),
 
     editExperience: builder.mutation({
       query: ({ id, ...body }) => ({
@@ -40,4 +44,5 @@ export const {
   useGetAllExperienceQuery,
   useEditExperienceMutation,
   useDeleteExperienceMutation,
+  useGetExperienceDetailQuery,
 } = experienceApi;

@@ -5,6 +5,7 @@ import {
   createExperience,
   deleteExperience,
   getAllExperiences,
+  getExperienceById,
   updateExperience,
 } from "../controllers/experience.js";
 
@@ -22,8 +23,7 @@ experienceRouter
   .route("/:id")
   .delete(verifyToken, authorizeRoles("admin"), deleteExperience);
 
-experienceRouter
-  .route("/")
-  .get(  getAllExperiences);
+experienceRouter.route("/").get(getAllExperiences);
+experienceRouter.route("/:id").get(getExperienceById);
 
 export default experienceRouter;

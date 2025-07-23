@@ -20,6 +20,7 @@ import ManageExperience from "../Admin/ManageExperience";
 import ManageProjects from "../Admin/ManageProjects";
 import ManageAbout from "../Admin/ManageAbout";
 import NotFound from "../pages/NotFound";
+import ExperienceDetails from "../pages/Experience/ExperienceDetail";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "experience",
         element: <Experience />,
+      },
+      {
+        path: "experience/:id",
+        element: <ExperienceDetails />,
       },
       {
         path: "skills",
