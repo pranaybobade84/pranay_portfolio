@@ -1,13 +1,19 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useAuthCheck } from "../../hooks/useAuthCheck";
+import { toast } from "react-toastify";
+import { useLogoutMutation } from "../../endpoints/auth/authEndpoint";
 
 const Navbar = () => {
+  const { isTokenValid, userRole } = useAuthCheck();
+  const [logout] = useLogoutMutation();
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
-  const isAuthenticated = true
-  const isAdmin = true;
+  const isAuthenticated = isTokenValid;
+  const isAdmin = userRole === "admin";
 
   const links = [
     { name: "Home", to: "/" },
@@ -18,6 +24,18 @@ const Navbar = () => {
     { name: "Blog", to: "/blog" },
     { name: "Contact", to: "/contact" },
   ];
+
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+      localStorage.clear();
+      toast.success("Logged out ✅");
+      navigate("/login");
+     window.location.reload()
+    } catch (err) {
+      toast.error("Logout failed");
+    }
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-black text-white border-b border-neutral-800 shadow-sm font-poppins">
@@ -31,7 +49,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-6">
           {/* Desktop Links */}
-          <nav className="hidden lg:flex gap-6 text-sm font-medium uppercase tracking-wide">
+          <nav className="hidden lg:flex gap-6 text-sm font-medium uppercase tracking-wide items-center">
             {links.map((link) => (
               <Link
                 key={link.name}
@@ -44,7 +62,6 @@ const Navbar = () => {
               </Link>
             ))}
 
-            {/* Conditional Auth Button */}
             {!isAuthenticated ? (
               <Link
                 to="/login"
@@ -52,17 +69,22 @@ const Navbar = () => {
               >
                 Login
               </Link>
-            ) : (
+            ) : isAdmin ? (
               <Link
-                to={isAdmin ? "/admin" : "/dashboard"}
+                to="/admin"
                 className="hover:text-yellow-400 text-yellow-500 transition duration-300"
               >
-                {isAdmin ? "Admin" : "Dashboard"}
+                Admin
               </Link>
+            ) : (
+              <button
+                onClick={handleLogout}
+                className="text-sm uppercase font-medium tracking-wide text-white hover:text-red-500 transition duration-300"
+              >
+                Logout
+              </button>
             )}
           </nav>
-
-         
 
           {/* Mobile Menu Button */}
           <button
@@ -102,18 +124,28 @@ const Navbar = () => {
           <Link
             to="/login"
             onClick={() => setMenuOpen(false)}
-            className="text-2xl font-semibold hover:text-red-500"
+            className="text-2xl font-semibold hover:text-red-500 transition duration-300"
           >
             Login
           </Link>
-        ) : (
+        ) : isAdmin ? (
           <Link
-            to={isAdmin ? "/admin" : "/dashboard"}
+            to="/admin"
             onClick={() => setMenuOpen(false)}
-            className="text-2xl font-semibold hover:text-yellow-400"
+            className="text-2xl font-semibold text-yellow-500 hover:text-yellow-400 transition duration-300"
           >
-            {isAdmin ? "Admin" : "Dashboard"}
+            Admin
           </Link>
+        ) : (
+          <button
+            onClick={() => {
+              setMenuOpen(false);
+              handleLogout();
+            }}
+            className="text-2xl font-semibold text-white hover:text-red-500 transition duration-300"
+          >
+            Logout
+          </button>
         )}
       </div>
     </header>
