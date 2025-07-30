@@ -35,7 +35,7 @@ const createProject = asyncHandler(async (req, res) => {
 
   const uploadedImages = await Promise.all(
     files.map(async (file) => {
-      const uploaded = await uploadOnCloudinary(file);
+      const uploaded = await uploadOnCloudinary(file.path);
       return uploaded.secure_url;
     })
   );
@@ -49,7 +49,6 @@ const createProject = asyncHandler(async (req, res) => {
     images: uploadedImages,
     videoDemo,
     category: category || "Personal",
-    order: order || 0,
     isFeatured: Boolean(isFeatured),
     isVisible: isVisible !== false,
   });
@@ -78,6 +77,7 @@ const deleteProject = asyncHandler(async (req, res) => {
 });
 
 const updateProject = asyncHandler(async (req, res) => {
+  console.log("REQ",req.body)
   const project = await Project.findById(req.params.id);
   if (!project) {
     return res.status(404).json({ message: "Project not found" });
@@ -99,27 +99,33 @@ const updateProject = asyncHandler(async (req, res) => {
 
   for (let key of allowedFields) {
     if (req.body.hasOwnProperty(key)) {
-      if (
-        (key === "title" || key === "description") &&
-        !req.body[key]?.trim()
-      ) {
+      const value = req.body[key];
+
+      if ((key === "title" || key === "description") && !value?.trim()) {
         return res.status(400).json({ message: `${key} cannot be empty` });
       }
 
       if (key === "title") {
-        project[key] = req.body[key].trim();
-      } else if (Array.isArray(project[key])) {
-        project[key] = Array.isArray(req.body[key])
-          ? req.body[key]
-          : project[key];
+        project[key] = value.trim();
+      } else if (key === "techStack") {
+        project[key] = typeof value === "string" ? value.split(",").map((item) => item.trim()) : [];
+      } else if (key === "isFeatured" || key === "isVisible") {
+        project[key] = value === "true";
+      } else if (key === "order") {
+        project[key] = Number(value);
       } else {
-        project[key] = req.body[key];
+        project[key] = value;
       }
     }
   }
 
-  await project.save();
-  res.status(200).json({ message: "Project updated successfully", project });
+  try {
+    await project.save();
+    res.status(200).json({ message: "Project updated successfully", project });
+  } catch (err) {
+    console.error("Update error:", err.message);
+    res.status(500).json({ message: "Failed to update project" });
+  }
 });
 
 export { updateProject, getAllProjects, createProject, deleteProject };

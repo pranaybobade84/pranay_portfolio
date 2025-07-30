@@ -7,6 +7,7 @@ export const projectApi = apiSlice.injectEndpoints({
         url: "/projects",
         method: "POST",
         body,
+        formData: true,
       }),
       invalidatesTags: ["Project"],
     }),
@@ -14,6 +15,7 @@ export const projectApi = apiSlice.injectEndpoints({
     getAllProjects: builder.query({
       query: () => "/projects",
       providesTags: ["Project"],
+      transformResponse: (res) => res?.projects,
     }),
 
     getProjectDetail: builder.query({
@@ -21,11 +23,13 @@ export const projectApi = apiSlice.injectEndpoints({
       providesTags: ["Project"],
     }),
 
-    editProject: builder.mutation({
-      query: ({ id, ...body }) => ({
+    updateProject: builder.mutation({
+      query: ({ id, ...data }) => ({
         url: `/projects/${id}`,
         method: "PATCH",
-        body,
+        body:data,
+        formData: true,
+        
       }),
       invalidatesTags: ["Project"],
     }),
@@ -44,6 +48,6 @@ export const {
   useAddProjectMutation,
   useGetAllProjectsQuery,
   useGetProjectDetailQuery,
-  useEditProjectMutation,
+  useUpdateProjectMutation,
   useDeleteProjectMutation,
 } = projectApi;

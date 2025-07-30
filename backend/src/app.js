@@ -30,7 +30,7 @@ app.use("/api/experience", experienceRouter);
 app.use("/api/about", aboutRouter);
 
 // Project Section
-app.use("/api/project", projectRouter);
+app.use("/api/projects", projectRouter);
 
 // Skills Section
 app.use("/api/skills", skillsRouter);

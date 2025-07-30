@@ -58,7 +58,22 @@ const ProjectForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+
+    const data = new FormData();
+    data.append("title", formData.title);
+    data.append("description", formData.description);
+    data.append("githubLink", formData.githubLink);
+    data.append("liveLink", formData.liveLink);
+    data.append("videoDemo", formData.videoDemo);
+    data.append("category", formData.category);
+    data.append("isFeatured", formData.isFeatured);
+    data.append("isVisible", formData.isVisible);
+
+    formData.techStack.forEach((item) => data.append("techStack[]", item));
+
+    formData.images.forEach((file) => data.append("images", file));
+
+    onSubmit(data);
   };
 
   return (
