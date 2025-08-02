@@ -1,32 +1,11 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
-
-const projects = [
-  {
-    title: "MERN Portfolio 2025",
-    description: "A developer portfolio with animations, blogs, and admin panel.",
-    techStack: ["React", "Node.js", "MongoDB"],
-    category: "Personal",
-    image: "https://images.unsplash.com/photo-1640082585991-1c4a4efc990b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1pbGVzdG9uZXxlbnwwfHwwfHx8MA%3D%3D",
-    github: "https://github.com/pranaybobade/portfolio",
-    live: "https://pranay.dev",
-  },
-  {
-    title: "Real-Time Chat App",
-    description: "Socket.IO-based chat with rooms, live status, and emoji support.",
-    techStack: ["React", "Socket.IO", "TailwindCSS"],
-    category: "Internship",
-    image: "https://images.unsplash.com/photo-1640082585991-1c4a4efc990b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1pbGVzdG9uZXxlbnwwfHwwfHx8MA%3D%3D",
-    github: "https://github.com/pranaybobade/chat-app",
-    live: "",
-  },
-];
+import { useGetAllProjectsQuery } from "../../endpoints/projects/projectEndpoint";
 
 const ProjectsSection = () => {
+  const { data = [] } = useGetAllProjectsQuery();
   return (
     <section className=" text-white py-28 px-6 font-poppins relative overflow-hidden">
-     
-
       <div className="text-center mb-28">
         <h2 className="text-5xl md:text-7xl font-extrabold uppercase relative inline-block">
           Projects
@@ -38,7 +17,7 @@ const ProjectsSection = () => {
       </div>
 
       <div className="flex flex-col gap-28 max-w-6xl mx-auto">
-        {projects.map((project, i) => (
+        {data?.map((project, i) => (
           <div
             key={i}
             className={`flex flex-col md:flex-row ${
@@ -47,7 +26,7 @@ const ProjectsSection = () => {
           >
             <div className="relative w-full md:w-1/2 overflow-hidden rounded-xl shadow-lg">
               <img
-                src={project.image}
+                src={project?.images?.[0]}
                 alt={project.title}
                 className="w-full h-72 md:h-96 object-cover transition-all duration-500 group-hover:scale-105"
               />
@@ -71,7 +50,9 @@ const ProjectsSection = () => {
             </div>
 
             <div className="text-center md:text-left w-full md:w-1/2">
-              <h3 className="text-3xl font-bold text-white mb-4">{project.title}</h3>
+              <h3 className="text-3xl font-bold text-white mb-4">
+                {project.title}
+              </h3>
               <p className="text-gray-400 mb-4">{project.description}</p>
               <div className="flex gap-6 justify-center md:justify-start mt-4">
                 {project.github && (
